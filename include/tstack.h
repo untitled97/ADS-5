@@ -4,36 +4,35 @@
 
 template<typename T, int size>
 class TStack {
-class TStack {
 private:
-    T arr[size];
+    T arr[size] = { 0 };
     int top;
 public:
-    TStack() :top(-1) {};
+    TStack() :top(-1) {}
     void push(const T& value) {
         if (isFull()) {
-        throw std::string("Full!");
-            } else {
-                arr[++top] = value;
-            }
-            }
-        const T& pop() {
+            throw std::string("Full!");
+        } else {
+            arr[++top] = value;
+        }
+    }
+    const T& pop() {
         if (isEmpty()) {
-        throw std::string("Empty!");
-            } else {
-                return arr[top--];
-            }
-                }
-            const T& get() {
+            throw std::string("Empty!");
+        } else {
+            return arr[top--];
+        }
+    }
+    const T& get() {
         if (isEmpty()) return arr[top];
         else throw std::string("Not get!");
-            }
-            bool isEmpty()const {
+    }
+    bool isEmpty()const {
         return top == -1;
-        }
-            bool isFull()const {
+    }
+    bool isFull()const {
         return top == size - 1;
-        }
+    }
 };
 
 #endif  // INCLUDE_TSTACK_H_
