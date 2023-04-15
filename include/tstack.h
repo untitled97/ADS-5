@@ -4,10 +4,10 @@
 
 template<typename T, int size>
 class TStack {
-private:
+  private:
     T arr[size] = { 0 };
     int top;
-public:
+  public:
     TStack() :top(-1) {}
     void push(const T& value) {
         if (isFull()) {
@@ -24,8 +24,11 @@ public:
         }
     }
     const T& get() {
-        if (isEmpty()) return arr[top];
-        else throw std::string("Not get!");
+        if (isEmpty()) {
+            return arr[top];
+        } else {
+            throw std::string("Not get!");
+        }
     }
     bool isEmpty()const {
         return top == -1;
