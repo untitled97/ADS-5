@@ -7,30 +7,26 @@ template<typename T, int size>
 class TStack {
  private:
     T arr[size] = { 0 };
-    int top;
-    
+    int top = -1;
+
  public:
-    TStack() :top(-1) {}
     void push(const T& value) {
-        if (isFull()) {
+        if (isFull())
             throw std::string("Full!");
-        } else {
+        else
             arr[++top] = value;
-        }
     }
     const T& pop() {
-        if (isEmpty()) {
+        if (isEmpty())
             throw std::string("Empty!");
-        } else {
+        else
             return arr[top--];
-        }
     }
-    const T& get() {
-        if (isEmpty()) {
-            return arr[top];
-        } else {
+    const T& isGet() {
+        if (isEmpty())
             throw std::string("Not get!");
-        }
+        else
+            return arr[top];
     }
     bool isEmpty()const {
         return top == -1;
