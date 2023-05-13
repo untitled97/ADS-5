@@ -14,62 +14,61 @@ std::string infx2pstfx(std::string inf) {
         char c = inf[i];
         if (isdigit(c)) {
             out += c;
-            i++;
-            while (i < inf.length()) {
+            while (i < inf.length() && isdigit(c) == true) {
+                i++;
                 c = inf[i];
-                if (isdigit(c)) {
-                    out += c;
-                } else {
-                    i--;
-                    break;
-                }
+                out += c;
             }
             out += ' ';
         } else if (c == '(') {
             stack1.push(c);
         } else if (c == ')') {
-            while (stack1.get() != '(') {
+            while (!stack1.isEmpty() && stack1.isGet() != '(') {
                 out += stack1.pop();
-                out += ' ';
+                out += " ";
             }
             stack1.pop();
         } else {
-            while (getPrior(c) <= getPrior(stack1.get())
-                   && stack1.isEmpty() != false) {
+            while (getPrior(c) <= getPrior(stack1.isGet())
+                && stack1.isEmpty() != false) {
                 out += stack1.pop();
-                out += ' ';
+                out += " ";
             }
             stack1.push(c);
         }
     }
     while (!stack1.isEmpty()) {
         out += stack1.pop();
+        if (!stack1.isEmpty())
+            out += " ";
     }
-    return out += ' ';
+    return out;
 }
 
 int eval(std::string pref) {
-    TStack<int, 100> stack2;
+    TStack<char, 100> stack2;
     std::string res = "";
     for (int i = 0; i < pref.length(); i++) {
         if (pref[i] == ' ') {
             continue;
-        } else if (pref[i] >= '0' && pref[i] <= '9') {
+        }
+        else if (pref[i] >= '0' && pref[i] <= '9') {
             stack2.push(pref[i] - '0');
-        } else if (pref[i]) {
+        }
+        else if (pref[i]) {
             int oper1 = stack2.pop();
             int oper2 = stack2.pop();
             if (pref[i] == '+')
-                    stack2.push(oper2 + oper1);
+                stack2.push(oper2 + oper1);
             if (pref[i] == '-')
-                    stack2.push(oper2 - oper1);
+                stack2.push(oper2 - oper1);
             if (pref[i] == '*')
-                    stack2.push(oper2 * oper1);
+                stack2.push(oper1 * oper1);
             if (pref[i] == '/')
-                    stack2.push(oper2 / oper1);
+                stack2.push(oper2 / oper1);
         }
     }
-    return stack2.get();
+    return stack2.isGet();
 }
 
 int getPrior(char c) {
