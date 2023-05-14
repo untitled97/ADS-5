@@ -48,20 +48,21 @@ std::string infx2pstfx(std::string inf) {
 int eval(std::string pref) {
     TStack<char, 100> stack2;
     std::string res = "";
+    int oper1, oper2;
     for (int i = 0; i < pref.length(); i++) {
         if (pref[i] == ' ') {
             continue;
         } else if (pref[i] >= '0' && pref[i] <= '9') {
             stack2.push(pref[i] - '0');
         } else if (pref[i]) {
-            int oper1 = stack2.pop();
-            int oper2 = stack2.pop();
+            oper1 = stack2.pop();
+            oper2 = stack2.pop();
             if (pref[i] == '+')
                 stack2.push(oper2 + oper1);
             if (pref[i] == '-')
                 stack2.push(oper2 - oper1);
             if (pref[i] == '*')
-                stack2.push(oper1 * oper1);
+                stack2.push(oper1 * oper2);
             if (pref[i] == '/')
                 stack2.push(oper2 / oper1);
         }
