@@ -29,7 +29,7 @@ std::string infx2pstfx(std::string inf) {
             }
             stack1.pop();//
         } else {
-            while (!stack1.isEmpty() && 
+            while (!stack1.isEmpty() &&
                    getPrior(c) <= getPrior(stack1.isGet())) {
                 out += stack1.pop();
                 out += " ";
