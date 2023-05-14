@@ -14,25 +14,27 @@ std::string infx2pstfx(std::string inf) {
         char c = inf[i];
         if (isdigit(c)) {
             out += c;
-            while (i < inf.length() && isdigit(c) == true) {
+            while (i < inf.length() && isdigit(c)) {
                 i++;
                 c = inf[i];
                 out += c;
             }
-            out += ' ';
+            out += " ";
         } else if (c == '(') {
             stack1.push(c);
         } else if (c == ')') {
             while (!stack1.isEmpty() && stack1.isGet() != '(') {
-                out += stack1.pop();
+                out += stack1.isGet();
                 out += " ";
+                stack1.pop();
             }
             stack1.pop();
         } else {
             while (getPrior(c) <= getPrior(stack1.isGet())
-                && stack1.isEmpty() != false) {
-                out += stack1.pop();
+                && !stack1.isEmpty()) {
+                out += stack1.isGet();
                 out += " ";
+                stack1.pop();
             }
             stack1.push(c);
         }
@@ -51,11 +53,9 @@ int eval(std::string pref) {
     for (int i = 0; i < pref.length(); i++) {
         if (pref[i] == ' ') {
             continue;
-        }
-        else if (pref[i] >= '0' && pref[i] <= '9') {
+        } else if (pref[i] >= '0' && pref[i] <= '9') {
             stack2.push(pref[i] - '0');
-        }
-        else if (pref[i]) {
+        } else if (pref[i]) {
             int oper1 = stack2.pop();
             int oper2 = stack2.pop();
             if (pref[i] == '+')
