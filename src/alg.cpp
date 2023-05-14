@@ -14,27 +14,25 @@ std::string infx2pstfx(std::string inf) {
         char c = inf[i];
         if (isdigit(c)) {
             out += c;
-            while (i < inf.length() && isdigit(c)) {
-                i++;
+            while (++i < inf.length() && inf[i] == isdigit(c)) {
                 c = inf[i];
                 out += c;
             }
             out += " ";
+            i--;
         } else if (c == '(') {
             stack1.push(c);
         } else if (c == ')') {
-            while (!stack1.isEmpty() && stack1.isGet() != '(') {
-                out += stack1.isGet();
+            while (stack1.isGet() != '(') {
+                out += stack1.pop();
                 out += " ";
-                stack1.pop();
             }
-            stack1.pop();
+            stack1.pop();//
         } else {
-            while (getPrior(c) <= getPrior(stack1.isGet())
-                && !stack1.isEmpty()) {
-                out += stack1.isGet();
+            while (!stack1.isEmpty() && 
+                   getPrior(c) <= getPrior(stack1.isGet())) {
+                out += stack1.pop();
                 out += " ";
-                stack1.pop();
             }
             stack1.push(c);
         }
