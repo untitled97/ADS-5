@@ -70,6 +70,7 @@ int eval(std::string pref) {
     return stack2.isGet();
 }
 
+
 int getPrior(char c) {
     if (c == '(') return 0;
     if (c == ')') return 1;
